@@ -48,6 +48,14 @@ int main() {
         }
         printf("Vertice %d -> grau = %d\n", i, grau);
     }
+    
+    printf("\nResultado do grafo:\n");
+    for(int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            printf("%d ", matriz[i][j]);
+        }
+        printf("\n");
+    }
 
     return 0;
 }
