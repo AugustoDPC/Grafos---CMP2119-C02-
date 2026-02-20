@@ -46,7 +46,7 @@ int main() {
         for (int j = 0; j < n; j++) {
             grau += matriz[i][j];
         }
-        printf("Vertice %d -> grau = %d\n", i, grau);
+        printf("Vertice %d - grau = %d\n", i, grau);
     }
     
     printf("\nResultado do grafo:\n");
