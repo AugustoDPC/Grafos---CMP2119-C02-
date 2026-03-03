@@ -16,12 +16,9 @@ int main() {
 
     int inc[V][E];
     int adj[V][V];
-    int grauEntrada[V], grauSaida[V];
 
     // Zerar graus e adjacencia
     for (int i = 0; i < V; i++) {
-        grauEntrada[i] = 0;
-        grauSaida[i] = 0;
         for (int j = 0; j < V; j++) {
             adj[i][j] = 0;
         }
@@ -30,38 +27,42 @@ int main() {
     printf("Digite a matriz de incidencia (%dx%d)\n", V, E);
     printf("Use +1 (origem), 0 (nada), -1 (destino):\n");
 
-    // Ler matriz + validar -1/0/1
+    // Le matriz e validar
     for (int i = 0; i < V; i++) {
         for (int j = 0; j < E; j++) {
             scanf("%d", &inc[i][j]);
             if (inc[i][j] != -1 && inc[i][j] != 0 && inc[i][j] != 1) {
-                printf("Erro: digite apenas -1, 0 ou 1.\n");
+                printf("Deu erro: digite apenas -1, 0 ou 1.\n");
                 return 1;
             }
         }
     }
 
-    // Validar colunas e calcular graus (tudo junto)
+    // Validar colunas e calcular graus
     for (int i = 0; i < E; i++) {
         int quantidadeOrigem = 0, quantidadeDestino = 0;
 
         for (int j = 0; j < V; j++) {
-            if (inc[j][i] ==  1) { quantidadeOrigem++;  grauSaida[j]++; }
-            if (inc[j][i] == -1) { quantidadeDestino++; grauEntrada[j]++; }
+            if (inc[j][i] ==  1) { quantidadeOrigem++; }
+            if (inc[j][i] == -1) { quantidadeDestino++;}
         }
 
         if (quantidadeOrigem != 1 || quantidadeDestino != 1) {
-            printf("Erro: Coluna %d invalida. Deve ter 1 origem (+1) e 1 destino (-1).\n", i);
+            printf("Deu erro: Coluna %d invalida. Deve ter 1 origem (+1) e 1 destino (-1).\n", i);
             return 1;
         }
     }
 
-    printf("\nGraus dos vertices:\n");
-    for (int v = 0; v < V; v++) {
-        printf("Vertice %d - entrada = %d, saida = %d\n", v, grauEntrada[v], grauSaida[v]);
+    printf("\nGraus dos Vertices\n");
+    for(int i = 0; i < V; i++) {
+        int grau_entrada = 0, grau_saida = 0;
+        for(int j = 0; j < E; j++) {
+            if(inc[i][j] == -1) grau_entrada++;
+            if(inc[i][j] == 1) grau_saida++;
+        }
+        printf("Vertice %d = Grau Entrada: %d | Grau Saida: %d\n", i, grau_entrada, grau_saida);
     }
 
-    // Converter incidencia -> adjacencia
     for (int a = 0; a < E; a++) {
         int origem = -1, destino = -1;
 
@@ -70,7 +71,7 @@ int main() {
             if (inc[v][a] == -1) destino = v;
         }
 
-        adj[origem][destino] += 1; // ou = 1 se quiser só 0/1
+        adj[origem][destino] = 1;
     }
 
     printf("\nMatriz de adjacencia (%dx%d):\n", V, V);
