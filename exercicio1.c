@@ -15,7 +15,7 @@ int main() {
     }
 
     printf("Digite a matriz de adjacencia (%dx%d)\n", n, n);
-    printf("Use apenas 0 (sem aresta) ou 1 (com aresta):\n");
+    printf("Use apenas 0 ou 1:\n");
 
     // Ler matriz + validar 0/1
     for (int i = 0; i < n; i++) {
