@@ -27,18 +27,18 @@ int main() {
         }
     }
 
-    for (int linha = 0; linha < quantidadeVertices; linha++) {
+    for (int i = 0; i < quantidadeVertices; i++) {
         //verifica linha central
-        if (matrizAdjacencia[linha][linha] != 0) {
+        if (matrizAdjacencia[i][i] != 0) {
             grafoEhSimples = 0;
         }
 
-        for (int coluna = 0; coluna < quantidadeVertices; coluna++) {
-            if (matrizAdjacencia[linha][coluna] != 0 && matrizAdjacencia[linha][coluna] != 1) {
+        for (int j = 0; j < quantidadeVertices; j++) {
+            if (matrizAdjacencia[i][j] != 0 && matrizAdjacencia[i][j] != 1) {
                 grafoEhSimples = 0;
             }
 
-            if (matrizAdjacencia[linha][coluna] != matrizAdjacencia[coluna][linha]) {
+            if (matrizAdjacencia[i][j] != matrizAdjacencia[j][i]) {
                 grafoEhSimples = 0;
             }
         }
@@ -49,14 +49,14 @@ int main() {
         return 0;
     }
 
-    for (int linha = 0; linha < quantidadeVertices; linha++) {
-        grauDeCadaVertice[linha] = 0;
+    for (int i = 0; i < quantidadeVertices; i++) {
+        grauDeCadaVertice[i] = 0;
 
-        for (int coluna = 0; coluna < quantidadeVertices; coluna++) {
-            grauDeCadaVertice[linha] += matrizAdjacencia[linha][coluna];
+        for (int j = 0; j < quantidadeVertices; j++) {
+            grauDeCadaVertice[i] += matrizAdjacencia[i][j];
         }
 
-        if (grauDeCadaVertice[linha] % 2 != 0) {
+        if (grauDeCadaVertice[i] % 2 != 0) {
             quantidadeVerticesImpares = quantidadeVerticesImpares + 1;
         }
     }

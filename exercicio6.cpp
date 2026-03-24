@@ -53,9 +53,11 @@ int verificarSeEhRoda(int grausDosVertices[MAXIMO_VERTICES], int quantidadeVerti
         if (grausDosVertices[i] == quantidadeVertices - 1) {
             quantidadeVerticesComGrauMaximo++;
         }
+	
+tarefas
+	
+2 hours ago
 
-        if (grausDosVertices[i] == 3) {
-            quantidadeVerticesComGrauTres++;
         }
     }
 
