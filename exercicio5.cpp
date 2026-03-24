@@ -9,25 +9,39 @@ int main() {
 
     cout << "Digite a quantidade de vertices do grafo 1: ";
     cin >> n1;
+    while(n1 <= 0) {
+        cout<<"Numero invalido, digite um valor maior que 0: ";
+        cin>>n1;
+    }
+
 
     cout << "Digite a quantidade de vertices do grafo 2: ";
     cin >> n2;
 
+    while(n2 <= 0) {
+        cout<<"Numero invalido, digite um valor maior que 0: ";
+        cin>>n2;
+    }
+
+
     if (n1 != n2) {
         cout << "NAO podem ser isomorfos.\n";
-        cout << "Motivo: quantidade de vertices diferente.\n";
         return 0;
     }
 
-    int g1[100][100];
-    int g2[100][100];
-    int graus1[100];
-    int graus2[100];
+    int g1[n1][n1];
+    int g2[n2][n2];
+    int graus1[n1];
+    int graus2[n2];
 
     cout << "Digite a matriz do grafo 1:\n";
     for (i = 0; i < n1; i++) {
         for (j = 0; j < n1; j++) {
             cin >> g1[i][j];
+            while(g1[i][j] != 0 && g1[i][j] != 1) {
+                 cout<<"Valor invalido - digite 0 ou 1";
+                 cin>>g1[i][j];
+             }
         }
     }
 
@@ -35,10 +49,14 @@ int main() {
     for (i = 0; i < n2; i++) {
         for (j = 0; j < n2; j++) {
             cin >> g2[i][j];
+            while(g2[i][j] != 0 && g2[i][j] != 1) {
+                 cout<<"Valor invalido - digite 0 ou 1";
+                 cin>>g2[i][j];
+             }
         }
     }
 
-    // calcular graus do grafo 1
+    // calcula graus do grafo 1
     for (i = 0; i < n1; i++) {
         graus1[i] = 0;
         for (j = 0; j < n1; j++) {
@@ -46,7 +64,7 @@ int main() {
         }
     }
 
-    // calcular graus do grafo 2
+    // calcula graus do grafo 2
     for (i = 0; i < n2; i++) {
         graus2[i] = 0;
         for (j = 0; j < n2; j++) {
@@ -54,7 +72,7 @@ int main() {
         }
     }
 
-    // contar arestas do grafo 1
+    // conta arestas do grafo 1
     for (i = 0; i < n1; i++) {
         for (j = i + 1; j < n1; j++) {
             if (g1[i][j] == 1) {
@@ -63,7 +81,7 @@ int main() {
         }
     }
 
-    // contar arestas do grafo 2
+    // conta arestas do grafo 2
     for (i = 0; i < n2; i++) {
         for (j = i + 1; j < n2; j++) {
             if (g2[i][j] == 1) {
@@ -74,11 +92,10 @@ int main() {
 
     if (arestas1 != arestas2) {
         cout << "NAO podem ser isomorfos.\n";
-        cout << "Motivo: quantidade de arestas diferente.\n";
         return 0;
     }
 
-    // ordenar graus1 manualmente
+    // ordenar graus
     for (i = 0; i < n1 - 1; i++) {
         for (j = i + 1; j < n1; j++) {
             if (graus1[i] > graus1[j]) {
@@ -89,7 +106,7 @@ int main() {
         }
     }
 
-    // ordenar graus2 manualmente
+    // ordenar graus
     for (i = 0; i < n2 - 1; i++) {
         for (j = i + 1; j < n2; j++) {
             if (graus2[i] > graus2[j]) {
@@ -104,7 +121,6 @@ int main() {
     for (i = 0; i < n1; i++) {
         if (graus1[i] != graus2[i]) {
             cout << "NAO podem ser isomorfos.\n";
-            cout << "Motivo: sequencia de graus diferente.\n";
             return 0;
         }
     }

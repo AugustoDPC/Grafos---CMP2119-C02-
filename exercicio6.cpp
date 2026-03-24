@@ -3,23 +3,22 @@ using namespace std;
 
 const int MAXIMO_VERTICES = 100;
 
-// Função para calcular os graus de todos os vértices
 void calcularGrausDosVertices(int matrizAdjacencia[MAXIMO_VERTICES][MAXIMO_VERTICES], int quantidadeVertices, int grausDosVertices[MAXIMO_VERTICES]) {
-    for (int linhaVertice = 0; linhaVertice < quantidadeVertices; linhaVertice++) {
-        grausDosVertices[linhaVertice] = 0;
+    for (int i = 0; i < quantidadeVertices; i++) {
+        grausDosVertices[i] = 0;
 
-        for (int colunaVertice = 0; colunaVertice < quantidadeVertices; colunaVertice++) {
-            if (matrizAdjacencia[linhaVertice][colunaVertice] == 1) {
-                grausDosVertices[linhaVertice]++;
+        for (int j = 0; j < quantidadeVertices; j++) {
+            if (matrizAdjacencia[i][j] == 1) {
+                grausDosVertices[i]++;
             }
         }
     }
 }
 
-// Função para verificar se é grafo completo
+
 int verificarSeEhCompleto(int grausDosVertices[MAXIMO_VERTICES], int quantidadeVertices) {
-    for (int verticeAtual = 0; verticeAtual < quantidadeVertices; verticeAtual++) {
-        if (grausDosVertices[verticeAtual] != quantidadeVertices - 1) {
+    for (int i = 0; i < quantidadeVertices; i++) {
+        if (grausDosVertices[i] != quantidadeVertices - 1) {
             return 0;
         }
     }
@@ -27,14 +26,13 @@ int verificarSeEhCompleto(int grausDosVertices[MAXIMO_VERTICES], int quantidadeV
     return 1;
 }
 
-// Função para verificar se é ciclo
 int verificarSeEhCiclo(int grausDosVertices[MAXIMO_VERTICES], int quantidadeVertices) {
     if (quantidadeVertices < 3) {
         return 0;
     }
 
-    for (int verticeAtual = 0; verticeAtual < quantidadeVertices; verticeAtual++) {
-        if (grausDosVertices[verticeAtual] != 2) {
+    for (int i = 0; i < quantidadeVertices; i++) {
+        if (grausDosVertices[i] != 2) {
             return 0;
         }
     }
@@ -42,7 +40,7 @@ int verificarSeEhCiclo(int grausDosVertices[MAXIMO_VERTICES], int quantidadeVert
     return 1;
 }
 
-// Função para verificar se é roda
+
 int verificarSeEhRoda(int grausDosVertices[MAXIMO_VERTICES], int quantidadeVertices) {
     if (quantidadeVertices < 4) {
         return 0;
@@ -51,12 +49,12 @@ int verificarSeEhRoda(int grausDosVertices[MAXIMO_VERTICES], int quantidadeVerti
     int quantidadeVerticesComGrauMaximo = 0;
     int quantidadeVerticesComGrauTres = 0;
 
-    for (int verticeAtual = 0; verticeAtual < quantidadeVertices; verticeAtual++) {
-        if (grausDosVertices[verticeAtual] == quantidadeVertices - 1) {
+    for (int i = 0; i < quantidadeVertices; i++) {
+        if (grausDosVertices[i] == quantidadeVertices - 1) {
             quantidadeVerticesComGrauMaximo++;
         }
 
-        if (grausDosVertices[verticeAtual] == 3) {
+        if (grausDosVertices[i] == 3) {
             quantidadeVerticesComGrauTres++;
         }
     }
@@ -75,11 +73,19 @@ int main() {
 
     cout << "Digite a quantidade de vertices: ";
     cin >> quantidadeVertices;
+    while(quantidadeVertices <= 0) {
+        cout<<"Numero invalido, digite um valor maior que 0: ";
+        cin>>quantidadeVertices;
+    }
 
     cout << "Digite a matriz de adjacencia:" << endl;
-    for (int linhaVertice = 0; linhaVertice < quantidadeVertices; linhaVertice++) {
-        for (int colunaVertice = 0; colunaVertice < quantidadeVertices; colunaVertice++) {
-            cin >> matrizAdjacencia[linhaVertice][colunaVertice];
+    for (int i = 0; i < quantidadeVertices; i++) {
+        for (int j = 0; j < quantidadeVertices; j++) {
+            cin >> matrizAdjacencia[i][j];
+            while(matrizAdjacencia[i][j] != 0 && matrizAdjacencia[i][j] != 1) {
+                 cout<<"Valor invalido - digite 0 ou 1";
+                 cin>>matrizAdjacencia[i][j];
+             }
         }
     }
 

@@ -3,22 +3,32 @@ using namespace std;
 
 int main() {
     int quantidadeVertices;
-    int matrizAdjacencia[100][100];
-    int grauDeCadaVertice[100];
     int quantidadeVerticesImpares = 0;
     int grafoEhSimples = 1;
 
     cout << "Digite a quantidade de vertices: ";
     cin >> quantidadeVertices;
+    while(quantidadeVertices <= 0) {
+        cout<<"Numero invalido, digite um valor maior que 0: ";
+        cin>>quantidadeVertices;
+    }
+
+    int matrizAdjacencia[quantidadeVertices][quantidadeVertices];
+    int grauDeCadaVertice[quantidadeVertices];
 
     cout << "Digite a matriz de adjacencia:\n";
-    for (int linha = 0; linha < quantidadeVertices; linha++) {
-        for (int coluna = 0; coluna < quantidadeVertices; coluna++) {
-            cin >> matrizAdjacencia[linha][coluna];
+    for (int i = 0; i < quantidadeVertices; i++) {
+        for (int j = 0; j < quantidadeVertices; j++) {
+            cin >> matrizAdjacencia[i][j];
+            while(matrizAdjacencia[i][j] != 0 && matrizAdjacencia[i][j] != 1) {
+                 cout<<"Valor invalido - digite 0 ou 1";
+                 cin>>matrizAdjacencia[i][j];
+             }
         }
     }
 
     for (int linha = 0; linha < quantidadeVertices; linha++) {
+        //verifica linha central
         if (matrizAdjacencia[linha][linha] != 0) {
             grafoEhSimples = 0;
         }
@@ -43,7 +53,7 @@ int main() {
         grauDeCadaVertice[linha] = 0;
 
         for (int coluna = 0; coluna < quantidadeVertices; coluna++) {
-            grauDeCadaVertice[linha] = grauDeCadaVertice[linha] + matrizAdjacencia[linha][coluna];
+            grauDeCadaVertice[linha] += matrizAdjacencia[linha][coluna];
         }
 
         if (grauDeCadaVertice[linha] % 2 != 0) {
