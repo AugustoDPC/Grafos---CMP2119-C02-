@@ -34,9 +34,6 @@ int main() {
         }
 
         for (int j = 0; j < quantidadeVertices; j++) {
-            if (matrizAdjacencia[i][j] != 0 && matrizAdjacencia[i][j] != 1) {
-                grafoEhSimples = 0;
-            }
 
             if (matrizAdjacencia[i][j] != matrizAdjacencia[j][i]) {
                 grafoEhSimples = 0;
