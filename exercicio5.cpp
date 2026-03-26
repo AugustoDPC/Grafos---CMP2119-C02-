@@ -14,7 +14,6 @@ int main() {
         cin>>n1;
     }
 
-
     cout << "Digite a quantidade de vertices do grafo 2: ";
     cin >> n2;
 
@@ -22,7 +21,6 @@ int main() {
         cout<<"Numero invalido, digite um valor maior que 0: ";
         cin>>n2;
     }
-
 
     if (n1 != n2) {
         cout << "NAO podem ser isomorfos.\n";
@@ -39,7 +37,7 @@ int main() {
         for (j = 0; j < n1; j++) {
             cin >> g1[i][j];
             while(g1[i][j] != 0 && g1[i][j] != 1) {
-                 cout<<"Valor invalido - digite 0 ou 1";
+                 cout<<"Valor invalido - digite 0 ou 1: ";
                  cin>>g1[i][j];
              }
         }
@@ -50,9 +48,44 @@ int main() {
         for (j = 0; j < n2; j++) {
             cin >> g2[i][j];
             while(g2[i][j] != 0 && g2[i][j] != 1) {
-                 cout<<"Valor invalido - digite 0 ou 1";
+                 cout<<"Valor invalido - digite 0 ou 1: ";
                  cin>>g2[i][j];
              }
+        }
+    }
+
+
+    // verificar se o grafo 1 é simples
+    for (i = 0; i < n1; i++) {
+        if (g1[i][i] != 0) {
+            cout << "O grafo 1 NAO e simples, pois possui laco.\n";
+            return 0;
+        }
+    }
+
+    for (i = 0; i < n1; i++) {
+        for (j = 0; j < n1; j++) {
+            if (g1[i][j] != g1[j][i]) {
+                cout << "O grafo 1 NAO e simples, pois a matriz nao e simetrica.\n";
+                return 0;
+            }
+        }
+    }
+
+    // verificar se o grafo 2 é simples
+    for (i = 0; i < n2; i++) {
+        if (g2[i][i] != 0) {
+            cout << "O grafo 2 NAO e simples, pois possui laco.\n";
+            return 0;
+        }
+    }
+
+    for (i = 0; i < n2; i++) {
+        for (j = 0; j < n2; j++) {
+            if (g2[i][j] != g2[j][i]) {
+                cout << "O grafo 2 NAO e simples, pois a matriz nao e simetrica.\n";
+                return 0;
+            }
         }
     }
 

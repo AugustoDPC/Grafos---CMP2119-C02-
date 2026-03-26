@@ -41,6 +41,20 @@ int main() {
         }
     }
 
+    for (int i = 0; i < quantidadeVertices; i++) {
+        // verifica se existe laco
+        if (matrizAdjacencia[i][i] != 0) {
+            grafoEhSimples = 0;
+        }
+
+        // verifica se a matriz e simetrica
+        for (int j = 0; j < quantidadeVertices; j++) {
+            if (matrizAdjacencia[i][j] != matrizAdjacencia[j][i]) {
+                grafoEhSimples = 0;
+            }
+        }
+    }
+
     if (grafoEhSimples == 0) {
         cout << "O grafo informado nao e simples\n";
         return 0;

@@ -15,7 +15,6 @@ void calcularGrausDosVertices(int matrizAdjacencia[MAXIMO_VERTICES][MAXIMO_VERTI
     }
 }
 
-
 int verificarSeEhCompleto(int grausDosVertices[MAXIMO_VERTICES], int quantidadeVertices) {
     for (int i = 0; i < quantidadeVertices; i++) {
         if (grausDosVertices[i] != quantidadeVertices - 1) {
@@ -40,7 +39,6 @@ int verificarSeEhCiclo(int grausDosVertices[MAXIMO_VERTICES], int quantidadeVert
     return 1;
 }
 
-
 int verificarSeEhRoda(int grausDosVertices[MAXIMO_VERTICES], int quantidadeVertices) {
     if (quantidadeVertices < 4) {
         return 0;
@@ -53,11 +51,9 @@ int verificarSeEhRoda(int grausDosVertices[MAXIMO_VERTICES], int quantidadeVerti
         if (grausDosVertices[i] == quantidadeVertices - 1) {
             quantidadeVerticesComGrauMaximo++;
         }
-	
-tarefas
-	
-2 hours ago
 
+        if (grausDosVertices[i] == 3) {
+            quantidadeVerticesComGrauTres++;
         }
     }
 
@@ -75,21 +71,41 @@ int main() {
 
     cout << "Digite a quantidade de vertices: ";
     cin >> quantidadeVertices;
-    while(quantidadeVertices <= 0) {
-        cout<<"Numero invalido, digite um valor maior que 0: ";
-        cin>>quantidadeVertices;
+    while (quantidadeVertices <= 0) {
+        cout << "Numero invalido, digite um valor maior que 0: ";
+        cin >> quantidadeVertices;
     }
 
     cout << "Digite a matriz de adjacencia:" << endl;
     for (int i = 0; i < quantidadeVertices; i++) {
         for (int j = 0; j < quantidadeVertices; j++) {
             cin >> matrizAdjacencia[i][j];
-            while(matrizAdjacencia[i][j] != 0 && matrizAdjacencia[i][j] != 1) {
-                 cout<<"Valor invalido - digite 0 ou 1";
-                 cin>>matrizAdjacencia[i][j];
-             }
+            while (matrizAdjacencia[i][j] != 0 && matrizAdjacencia[i][j] != 1) {
+                cout << "Valor invalido - digite 0 ou 1: ";
+                cin >> matrizAdjacencia[i][j];
+            }
         }
     }
+
+   
+    // verificar se é grafo simples: sem laço
+    for (int i = 0; i < quantidadeVertices; i++) {
+        if (matrizAdjacencia[i][i] != 0) {
+            cout << "O grafo nao eh simples, pois possui laco." << endl;
+            return 0;
+        }
+    }
+
+    // verificar se é grafo simples: matriz simétrica
+    for (int i = 0; i < quantidadeVertices; i++) {
+        for (int j = 0; j < quantidadeVertices; j++) {
+            if (matrizAdjacencia[i][j] != matrizAdjacencia[j][i]) {
+                cout << "O grafo nao eh simples, pois a matriz nao eh simetrica." << endl;
+                return 0;
+            }
+        }
+    }
+    
 
     calcularGrausDosVertices(matrizAdjacencia, quantidadeVertices, grausDosVertices);
 
