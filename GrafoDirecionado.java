@@ -48,6 +48,16 @@ public class GrafoDirecionado {
             }
         }
 
+        int verticesInicial = 0;
+
+        System.out.print("Digite o numero de vertices do que comeca o dfs: ");
+        verticesInicial = scanner.nextInt();
+        while (verticesInicial <= 0) {
+            System.out.print("Numero invalido. Digite novamente: ");
+            verticesInicial = scanner.nextInt();
+        }
+
+
         //DFS 
         int[] visitado = new int[vertices];
         int[] na_trilha = new int[vertices];
@@ -60,7 +70,7 @@ public class GrafoDirecionado {
         for (int inicio = 0; inicio < vertices; inicio++) {
             if (visitado[inicio] == 0 && tem_ciclo == 0) {
                 
-                pilha[topo] = inicio;
+                pilha[topo] = verticesInicial;
                 acoes[topo] = 0; 
                 topo++;
 
