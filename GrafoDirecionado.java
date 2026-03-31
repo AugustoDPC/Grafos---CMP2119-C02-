@@ -1,6 +1,5 @@
 import java.util.Scanner;
 
-// A nossa "Struct" em Java vira uma Classe simples
 class ListaAdjacencia {
     int[] vizinhos;
     int quantidade;
@@ -29,7 +28,7 @@ public class GrafoDirecionado {
             System.out.print("\nQuantos vertices estao ligados ao vertice " + i + "? ");
             lista[i].quantidade = scanner.nextInt();
 
-            while (lista[i].quantidade < 0 || lista[i].quantidade > vertices) {
+            while (lista[i].quantidade < 0 || lista[i].quantidade > vertices -1) {
                 System.out.print("Quantidade invalida. Tente novamente: ");
                 lista[i].quantidade = scanner.nextInt();
             }
@@ -41,7 +40,7 @@ public class GrafoDirecionado {
                 for (int j = 0; j < lista[i].quantidade; j++) {
                     lista[i].vizinhos[j] = scanner.nextInt();
 
-                    while (lista[i].vizinhos[j] < 0 || lista[i].vizinhos[j] >= vertices) {
+                    while (lista[i].vizinhos[j] < 0 || lista[i].vizinhos[j] >= vertices -1) {
                         System.out.print("Vertice invalido. Digite novamente: ");
                         lista[i].vizinhos[j] = scanner.nextInt();
                     }
@@ -49,8 +48,7 @@ public class GrafoDirecionado {
             }
         }
 
-        // Lógica do DFS Iterativo (Direcionado)
-        // Em Java, arrays de int já são inicializados com 0 automaticamente
+        //DFS 
         int[] visitado = new int[vertices];
         int[] na_trilha = new int[vertices];
         
@@ -72,7 +70,7 @@ public class GrafoDirecionado {
                     int acao = acoes[topo];
 
                     if (acao == 1) {
-                        na_trilha[atual] = 0; // Tira da trilha
+                        na_trilha[atual] = 0; // sai da trilha
                     } 
                     else if (visitado[atual] == 0) {
                         visitado[atual] = 1;  

@@ -27,7 +27,7 @@ public class GrafoSimples {
             System.out.print("\nQuantos vertices estao ligados ao vertice " + i + "? ");
             lista[i].quantidade = scanner.nextInt();
 
-            while (lista[i].quantidade < 0 || lista[i].quantidade >= vertices) {
+            while (lista[i].quantidade < 0 || lista[i].quantidade >= vertices-1) {
                 System.out.print("Invalido! (Maximo " + (vertices - 1) + "): ");
                 lista[i].quantidade = scanner.nextInt();
             }
@@ -39,7 +39,7 @@ public class GrafoSimples {
                 for (int j = 0; j < lista[i].quantidade; j++) {
                     lista[i].vizinhos[j] = scanner.nextInt();
 
-                    while (lista[i].vizinhos[j] < 0 || lista[i].vizinhos[j] >= vertices) {
+                    while (lista[i].vizinhos[j] < 0 || lista[i].vizinhos[j] >= vertices-1) {
                         System.out.print("Vertice invalido. Digite novamente: ");
                         lista[i].vizinhos[j] = scanner.nextInt();
                     }
@@ -61,7 +61,7 @@ public class GrafoSimples {
                     if (lista[i].vizinhos[k] == vizinho) eh_simples = 0;
                 }
 
-                // 3. Checa Simetria (Via de mão dupla)
+                // 3. Checa Simetria (
                 int tem_volta = 0;
                 for (int k = 0; k < lista[vizinho].quantidade; k++) {
                     if (lista[vizinho].vizinhos[k] == i) tem_volta = 1;
@@ -71,30 +71,30 @@ public class GrafoSimples {
         }
 
         if (eh_simples == 0) {
-            System.out.println("\nERRO: A lista inserida nao forma um grafo simples.");
+            System.out.println("\n A lista inserida nao forma um grafo simples.");
             scanner.close();
-            return; // Encerra o programa
+            return; 
         }
 
         // Lógica do DFS Iterativo (Grafo Simples com Pilha Dupla)
         int[] visitado = new int[vertices];
         int tem_ciclo = 0;
         
-        int[] pilha_v = new int[vertices * vertices];
-        int[] pilha_pai = new int[vertices * vertices];
+        int[] pilha_vertice = new int[vertices * vertices];
+        int[] pilha_anterior = new int[vertices * vertices];
         int topo = 0;
 
         for (int inicio = 0; inicio < vertices; inicio++) {
             if (visitado[inicio] == 0 && tem_ciclo == 0) {
                 
-                pilha_v[topo] = inicio;
-                pilha_pai[topo] = -1; // Sem pai
+                pilha_vertice[topo] = inicio;
+                pilha_anterior[topo] = -1; 
                 topo++;
 
                 while (topo > 0) {
                     topo--;
-                    int atual = pilha_v[topo];
-                    int pai_do_atual = pilha_pai[topo];
+                    int atual = pilha_vertice[topo];
+                    int anteriorVerticeAtual = pilha_anterior[topo];
 
                     if (visitado[atual] == 0) {
                         visitado[atual] = 1; 
@@ -103,16 +103,16 @@ public class GrafoSimples {
                         for (int j = 0; j < lista[atual].quantidade; j++) {
                             int vizinho = lista[atual].vizinhos[j];
                             
-                            // Achou um visitado que NÃO é o pai
-                            if (visitado[vizinho] == 1 && vizinho != pai_do_atual) {
+                            // Achou um visitado que NÃO é o anterior
+                            if (visitado[vizinho] == 1 && vizinho != anteriorVerticeAtual) {
                                 tem_ciclo = 1;
                                 topo = 0; 
                                 break;
                             }
                             
                             if (visitado[vizinho] == 0) {
-                                pilha_v[topo] = vizinho;
-                                pilha_pai[topo] = atual; 
+                                pilha_vertice[topo] = vizinho;
+                                pilha_anterior[topo] = atual; 
                                 topo++;
                             }
                         }
