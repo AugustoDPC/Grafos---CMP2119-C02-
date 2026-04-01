@@ -86,25 +86,24 @@ public class GrafoSimples {
             verticesInicial = scanner.nextInt();
         }
 
-        // Lógica do DFS Iterativo (Grafo Simples com Pilha Dupla)
         int[] visitado = new int[vertices];
         int tem_ciclo = 0;
         
         int[] pilha_vertice = new int[vertices * vertices];
-        int[] pilha_anterior = new int[vertices * vertices];
+        int[] vertice_empilhado = new int[vertices * vertices];
         int topo = 0;
 
         for (int inicio = 0; inicio < vertices; inicio++) {
             if (visitado[inicio] == 0 && tem_ciclo == 0) {
                 
                 pilha_vertice[topo] = verticesInicial;
-                pilha_anterior[topo] = -1; 
+                vertice_empilhado[topo] = -1; 
                 topo++;
 
                 while (topo > 0) {
                     topo--;
                     int atual = pilha_vertice[topo];
-                    int anteriorVerticeAtual = pilha_anterior[topo];
+                    int anteriorVerticeAtual = vertice_empilhado[topo];
 
                     if (visitado[atual] == 0) {
                         visitado[atual] = 1; 
@@ -122,7 +121,7 @@ public class GrafoSimples {
                             
                             if (visitado[vizinho] == 0) {
                                 pilha_vertice[topo] = vizinho;
-                                pilha_anterior[topo] = atual; 
+                                vertice_empilhado[topo] = atual; 
                                 topo++;
                             }
                         }
