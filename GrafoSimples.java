@@ -12,10 +12,11 @@ public class GrafoSimples {
 
         System.out.print("Digite o numero de vertices do grafo simples: ");
         vertices = scanner.nextInt();
-        while (vertices <= 0) {
+        while (vertices < 3) {
             System.out.print("Numero invalido. Digite novamente: ");
             vertices = scanner.nextInt();
         }
+
 
         ListaAdjacenciaSimples[] lista = new ListaAdjacenciaSimples[vertices];
         for (int i = 0; i < vertices; i++) {
