@@ -76,7 +76,7 @@ public class MainS {
 
         distancia[verticeInicial] = 0;
 
-        System.out.print("\nOrdem de visita da BFS (Em niveis): ");
+        System.out.print("\nOrdem de visita da BFS: ");
 
         while (inicioFila < fimFila) {
 
@@ -107,7 +107,7 @@ public class MainS {
             if (distancia[i] == -1) {
                 System.out.println("Vertice " + i + ": nao alcancado");
             } else {
-                System.out.println("Vertice " + i + ": " + distancia[i] + " aresta(s)");
+                System.out.println("Distancia do vertice " + i + ": " + distancia[i] );
             }
         }
 
