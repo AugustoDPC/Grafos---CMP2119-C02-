@@ -22,16 +22,15 @@ int main() {
         }
     }
 
-    // Valida se e grafo simples
     for (int i = 0; i < n; i++) {
         if (grafo[i][i] != 0) {
-            cout << "\nO grafo nao e simples, pois possui laco.\n";
+            cout << "\nO grafo nao eh simples, pois possui laco.\n";
             return 0;
         }
 
         for (int j = 0; j < n; j++) {
             if (grafo[i][j] != grafo[j][i]) {
-                cout << "\nO grafo nao e simples, pois a matriz nao e simetrica.\n";
+                cout << "\nO grafo nao eh simples, pois a matriz nao eh simetrica.\n";
                 return 0;
             }
         }
@@ -39,21 +38,24 @@ int main() {
 
     int qtdSubgrafo;
 
-    cout << "\nQuantos vertices tem o subgrafo? ";
+    cout << "\n Digite a quantidade de vertices que o subgrafo tem: ";
     cin >> qtdSubgrafo;
 
     int subgrafo[qtdSubgrafo];
+
+    while (qtdSubgrafo < 3 || qtdSubgrafo > n) {
+            cout << "Vertice invalido. Digite novamente: ";
+            cin >> qtdSubgrafo;
+    }
 
     cout << "Digite os vertices do subgrafo:\n";
 
     for (int i = 0; i < qtdSubgrafo; i++) {
         cin >> subgrafo[i];
 
-        subgrafo[i]--; // transforma de 1..N para 0..N-1
-
-        if (subgrafo[i] < 0 || subgrafo[i] >= n) {
-            cout << "Vertice invalido.\n";
-            return 0;
+        while (subgrafo[i] < 0 || subgrafo[i] > n) {
+            cout << "Vertice invalido. Digite novamente: ";
+            cin >> subgrafo[i];
         }
     }
 
@@ -71,9 +73,9 @@ int main() {
     }
 
     if (clique) {
-        cout << "\nO subgrafo informado e um clique.\n";
+        cout << "\nO subgrafo informado eh um clique.\n";
     } else {
-        cout << "\nO subgrafo informado nao e um clique.\n";
+        cout << "\nO subgrafo informado nao eh um clique.\n";
     }
 
     return 0;
