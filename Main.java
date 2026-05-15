@@ -34,6 +34,23 @@ public class Main {
                 matrizConexo[i][j] = matrizAdjacencia[i][j];
             }
         }
+        
+        for (int i = 0; i < quantidadeVertices; i++) {
+
+            if (matrizAdjacencia[i][i] != 0) {
+                System.out.println("\nO grafo nao eh simples, pois possui laco.");
+                sc.close();
+                return;
+            }
+
+            for (int j = 0; j < quantidadeVertices; j++) {
+                if (matrizAdjacencia[i][j] != matrizAdjacencia[j][i]) {
+                    System.out.println("\nO grafo nao eh simples, pois a matriz nao eh simetrica.");
+                    sc.close();
+                    return;
+                }
+            }
+        }
 
         System.out.println("\nA1:");
         mostrarMatriz(matrizMultiplicadora, quantidadeVertices);
