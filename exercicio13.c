@@ -58,7 +58,7 @@ int main() {
     printf("\nA1:\n");
     mostrarMatriz(quantidadeVertices, matrizMultiplicadora);
 
-    for (int comprimento = 2; comprimento <= quantidadeVertices - 1; comprimento++) {
+    for (int potencia = 2; potencia <= quantidadeVertices - 1; potencia++) {
         int matrizResultado[quantidadeVertices][quantidadeVertices];
 
         for (int i = 0; i < quantidadeVertices; i++) {
@@ -78,7 +78,7 @@ int main() {
             }
         }
 
-        printf("\nA%d:\n", comprimento);
+        printf("\nA%d:\n", potencia);
         mostrarMatriz(quantidadeVertices, matrizMultiplicadora);
     }
 
